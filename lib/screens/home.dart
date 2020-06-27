@@ -73,23 +73,59 @@ class _HomePageState extends State<HomePage> {
                 markers: Set.from(_myMarkers),
               )),
           Positioned(
-              top: MediaQuery.of(context).size.height - 230.0,
+              top: MediaQuery.of(context).size.height - 220.0,
               child: Wrap(
                 children: <Widget>[
                   Card(
-                      margin: EdgeInsets.only(
-                          top: 10, left: 10, right: 10, bottom: 10),
-                      elevation: 8,
-                      child: new Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Container(
-                            height: MediaQuery.of(context).size.height - 450.0,
-                            width: MediaQuery.of(context).size.width - 40.0,
-                            child: Wrap(
-                                alignment: WrapAlignment.center,
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                children: <Widget>[])),
-                      )),
+                    margin: EdgeInsets.only(
+                        top: 10, left: 10, right: 10, bottom: 10),
+                    elevation: 8,
+                    child: new Container(
+                        height: MediaQuery.of(context).size.height - 440.0,
+                        width: MediaQuery.of(context).size.width - 20.0,
+                        child: Wrap(
+                            alignment: WrapAlignment.center,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: <Widget>[
+                              Wrap(
+                                direction: Axis.horizontal,
+                                children: [
+                                  Image.asset('assets/fridge.png'),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: Wrap(
+                                        direction: Axis.vertical,
+                                        children: [
+                                          Text("Central Fridge"),
+                                          Text(
+                                            "12 km | 15 min",
+                                            style: TextStyle(fontSize: 10),
+                                          ),
+                                          RichText(
+                                            text: TextSpan(
+                                              text: '\n In  ',
+                                              style: TextStyle(fontSize: 10),
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                    text: 'Central Park',
+                                                    style: TextStyle(
+                                                        color: Colors.grey[500],
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.normal)),
+                                              ],
+                                            ),
+                                          )
+                                        ]),
+                                  ),
+                                  Wrap(
+                                    direction: Axis.vertical,
+                                    children: [Card()],
+                                  )
+                                ],
+                              )
+                            ])),
+                  ),
                 ],
               )),
         ],
