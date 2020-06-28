@@ -1,7 +1,8 @@
-// import 'package:buffetlocator/screens/home.dart';
+import 'package:buffetlocator/models/fridge_point.dart';
+import 'package:buffetlocator/screens/home.dart';
 import 'package:buffetlocator/screens/splash_screen.dart';
-import 'package:buffetlocator/services/abstract_data.dart';
-import 'package:buffetlocator/services/mock_data_service.dart';
+import 'package:buffetlocator/services/firestore.dart';
+import 'package:buffetlocator/services/mock.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,15 +13,15 @@ class BuffetLocator extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<DataServiceAbstract>(
-          create: (_) => MockDataService(),
-        )
+        StreamProvider<List<FridgePoint>>.value(
+          value: FirestoreDatabase().fridgeStream(),
+        ),
       ],
       child: MaterialApp(
         title: 'Buffet Locator',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
-        home: SplashScreen(),
+        home: HomePage(),
       ),
     );
   }
