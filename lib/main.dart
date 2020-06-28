@@ -1,4 +1,5 @@
-import 'package:buffetlocator/screens/home.dart';
+// import 'package:buffetlocator/screens/home.dart';
+import 'package:buffetlocator/screens/splash_screen.dart';
 import 'package:buffetlocator/services/abstract_data.dart';
 import 'package:buffetlocator/services/mock_data_service.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class BuffetLocator extends StatelessWidget {
         title: 'Buffet Locator',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
-        home: HomePage(),
+        home: SplashScreen(),
       ),
     );
   }
