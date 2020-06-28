@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:buffetlocator/misc/api_key.dart' as api_key;
 import 'package:buffetlocator/misc/map_style.dart';
 import 'package:provider/provider.dart';
+import 'package:buffetlocator/screens/components/tags.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -18,7 +19,6 @@ class _HomePageState extends State<HomePage> {
     zoom: 13.0,
   );
 
-  Set<Marker> fridges = Set<Marker>();
   BitmapDescriptor _markerIcon;
 
   _setMarkerIcon() async {
@@ -26,17 +26,9 @@ class _HomePageState extends State<HomePage> {
         ImageConfiguration(), 'assets/fridge.png');
   }
 
-  void _getDataTest() async {
-    final dataService =
-        Provider.of<DataServiceAbstract>(context, listen: false);
-    final fridgePoints = await dataService.getData();
-    print(fridgePoints);
-  }
-
   @override
   void initState() {
     super.initState();
-    _getDataTest();
     _setMarkerIcon();
   }
 
@@ -77,8 +69,8 @@ class _HomePageState extends State<HomePage> {
 
   void _onFridgeTapped(FridgePoint fridgePoint) async {
     print(fridgePoint);
-    final distance =
-        await getDistance(_initialCamerPosition.target, fridgePoint.location);
+    final distance = await getDistance(_initialCamerPosition.target,
+        LatLng(fridgePoint.location.latitude, fridgePoint.location.longitude));
     print('Distance from current location: $distance');
 
     showModalBottomSheet(
