@@ -1,12 +1,10 @@
 import 'package:buffetlocator/misc/helpers.dart';
 import 'package:buffetlocator/models/fridge_point.dart';
-import 'package:buffetlocator/services/abstract_data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:buffetlocator/api_key.dart' as api_key;
+import 'package:buffetlocator/misc/api_key.dart' as api_key;
 import 'package:buffetlocator/misc/map_style.dart';
 import 'package:provider/provider.dart';
-import 'package:buffetlocator/services/abstract_data.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,31 +18,16 @@ class _HomePageState extends State<HomePage> {
     zoom: 13.0,
   );
 
-  Set<Marker> fridges = Set<Marker>();
-
-  @override
-  void initState() {
-    super.initState();
-    _getDataTest();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final dataService =
-        Provider.of<DataServiceAbstract>(context, listen: false);
     return Scaffold(
       body: SafeArea(
-        child: FutureBuilder<List<FridgePoint>>(
-          future: dataService.getData(),
-          builder: (context, snapshot) {
-            return GoogleMap(
-              mapType: MapType.normal,
-              zoomControlsEnabled: false,
-              initialCameraPosition: _initialCamerPosition,
-              onMapCreated: _onMapCreated,
-              markers: snapshot.hasData ? _getMarkers(snapshot.data) : Set<Marker>(),
-            );
-          },
+        child: GoogleMap(
+          mapType: MapType.normal,
+          zoomControlsEnabled: false,
+          initialCameraPosition: _initialCamerPosition,
+          onMapCreated: _onMapCreated,
+          markers: _getMarkers(context.watch<List<FridgePoint>>()),
         ),
       ),
     );
@@ -57,31 +40,24 @@ class _HomePageState extends State<HomePage> {
 
   Set<Marker> _getMarkers(List<FridgePoint> points) {
     return points
-        .map(
+        ?.map(
           (fridge) => Marker(
             markerId: MarkerId(fridge.hashCode.toString()),
-            position: fridge.location,
+            position:
+                LatLng(fridge.location.latitude, fridge.location.longitude),
             icon: BitmapDescriptor.defaultMarker,
             infoWindow: InfoWindow(title: fridge.name),
             onTap: () => _onFridgeTapped(fridge),
           ),
         )
-        .toSet();
+        ?.toSet();
   }
 
   void _onFridgeTapped(FridgePoint fridgePoint) async {
     // TODO: show the fridge card here.
     print(fridgePoint);
-    final distance = await getDistance(_initialCamerPosition.target, fridgePoint.location);
+    final distance = await getDistance(_initialCamerPosition.target,
+        LatLng(fridgePoint.location.latitude, fridgePoint.location.longitude));
     print('Distance from current location: $distance');
-
-  }
-
-  void _getDataTest() async {
-    final dataService =
-        Provider.of<DataServiceAbstract>(context, listen: false);
-    final fridgePoints = await dataService.getData();
-    print(fridgePoints);
-
   }
 }
