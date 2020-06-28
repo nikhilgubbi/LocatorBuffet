@@ -25,14 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/location.png', color: Colors.orange,),
+              Image.asset('assets/location.png', color: Colors.green,),
               SizedBox(
                 height: 12,
               ),
               Text(
-                'BuffetLocator',
+                'Locator Buffet',
                 style: TextStyle(
-                    color: Colors.orange,
+                    color: Colors.green,
                     fontSize: 30,
                     fontWeight: FontWeight.w700),
               )
