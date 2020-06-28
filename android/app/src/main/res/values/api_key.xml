@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="geoApiKey">'AIzaSyCbikWuTuLRbo7MPzTt_NWIBlWGU1i4FSI'</string>
+    <string name="geoApiKey">AIzaSyCbikWuTuLRbo7MPzTt_NWIBlWGU1i4FSI</string>
 </resources>
