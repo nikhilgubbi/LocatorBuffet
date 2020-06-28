@@ -231,12 +231,6 @@ class _HomePageState extends State<HomePage> {
                 BoxShadow(blurRadius: 1, color: Colors.black, spreadRadius: 1)
               ])),
     );
-
-  void _getDataTest() async {
-    final dataService =
-        Provider.of<DataServiceAbstract>(context, listen: false);
-    final fridgePoints = await dataService.getData();
-    print(fridgePoints);
-
   }
+
 }
