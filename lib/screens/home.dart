@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             markerId: MarkerId(fridge.hashCode.toString()),
             position:
                 LatLng(fridge.location.latitude, fridge.location.longitude),
-            icon: BitmapDescriptor.defaultMarker,
+            icon: _markerIcon,
             infoWindow: InfoWindow(title: fridge.name),
             onTap: () => _onFridgeTapped(fridge),
           ),
