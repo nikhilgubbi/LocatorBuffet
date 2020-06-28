@@ -2,6 +2,8 @@ import 'package:buffetlocator/models/fridge_point.dart';
 import 'package:buffetlocator/screens/components/tags.dart';
 import 'package:flutter/material.dart';
 
+import 'bottom_tabs.dart';
+
 class DetailsCard extends StatelessWidget {
 
   const DetailsCard({this.fridge, this.distance});
@@ -89,48 +91,8 @@ class DetailsCard extends StatelessWidget {
               ),
             ),
             TagsList(fridge.tags.map((a) => a.toString()).toList()),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 50, 8, 8),
-              child: Wrap(
-                direction: Axis.horizontal,
-                children: [
-//                      SizedBox(height: 70),
-                  RawChip(
-                    backgroundColor: Colors.white70,
-                    labelStyle: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold),
-                    label: Text('Edit'),
-                  ),
-                  RawChip(
-                    backgroundColor: Colors.white70,
-                    labelStyle: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold),
-                    label: Text('Directions'),
-                  ),
-                  SizedBox(width: 55),
-                  RawChip(
-                    backgroundColor: Colors.white70,
-                    labelStyle: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold),
-                    label: Text('Comments'),
-                  ),
-                  RawChip(
-                    backgroundColor: Colors.white70,
-                    labelStyle: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold),
-                    label: Text('Prize'),
-                  ),
-                ],
-              ),
-            )
+            SizedBox(height: 100),
+            BottomTabsList(),
           ],
         ),
         decoration: BoxDecoration(

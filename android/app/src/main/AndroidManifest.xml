@@ -10,7 +10,7 @@
         android:label="buffetlocator"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="@string/geoApiKey"/>
+            android:value="AIzaSyCbikWuTuLRbo7MPzTt_NWIBlWGU1i4FSI"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
