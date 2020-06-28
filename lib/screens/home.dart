@@ -7,7 +7,6 @@ import 'package:buffetlocator/api_key.dart' as api_key;
 import 'package:buffetlocator/misc/map_style.dart';
 import 'package:provider/provider.dart';
 import 'package:buffetlocator/services/abstract_data.dart';
-
 import 'components/tags.dart';
 
 class HomePage extends StatefulWidget {
@@ -232,5 +231,12 @@ class _HomePageState extends State<HomePage> {
                 BoxShadow(blurRadius: 1, color: Colors.black, spreadRadius: 1)
               ])),
     );
+
+  void _getDataTest() async {
+    final dataService =
+        Provider.of<DataServiceAbstract>(context, listen: false);
+    final fridgePoints = await dataService.getData();
+    print(fridgePoints);
+
   }
 }
