@@ -167,6 +167,7 @@ class _FridgeListTileState extends State<FridgeListTile> {
             child: Icon(
               Icons.kitchen,
               size: 32,
+              color: Colors.white,
             ),
           ),
         ),
