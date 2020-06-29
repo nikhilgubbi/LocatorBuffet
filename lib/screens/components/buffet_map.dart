@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:buffetlocator/misc/helpers.dart';
 import 'package:buffetlocator/models/fridge_point.dart';
+import 'package:buffetlocator/screens/components/comments_card.dart';
 import 'package:buffetlocator/screens/components/details_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -90,14 +91,22 @@ class _BuffetMapState extends State<BuffetMap> {
     final distance = await getDistance(widget.initialPosition.target,
         LatLng(fridge.location.latitude, fridge.location.longitude));
     print('Distance from current location: $distance');
+  
 
     showModalBottomSheet(
       enableDrag: true,
       context: context,
-      builder: (context) => DetailsCard(
-        fridge: fridge,
-        distance: distance,
-      ),
+      builder: (context) => Container(
+        height: 300,
+        child: PageView(children: [
+          DetailsCard(
+          fridge: fridge,
+          distance: distance,
+        ),
+        CommentsCard()
+        ],
+        ),
+      )
     );
   }
 }
