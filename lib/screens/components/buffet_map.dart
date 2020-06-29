@@ -4,6 +4,7 @@ import 'package:buffetlocator/misc/helpers.dart';
 import 'package:buffetlocator/models/fridge_point.dart';
 import 'package:buffetlocator/screens/components/comments_card.dart';
 import 'package:buffetlocator/screens/components/details_card.dart';
+import 'package:buffetlocator/screens/components/donate_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -94,6 +95,7 @@ class _BuffetMapState extends State<BuffetMap> {
   
 
     showModalBottomSheet(
+      backgroundColor: Colors.transparent,
       enableDrag: true,
       context: context,
       builder: (context) => Container(
@@ -103,7 +105,8 @@ class _BuffetMapState extends State<BuffetMap> {
           fridge: fridge,
           distance: distance,
         ),
-        CommentsCard()
+        CommentsCard(),
+        DonateCard()
         ],
         ),
       )
