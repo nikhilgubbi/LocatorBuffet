@@ -81,11 +81,7 @@ class _BuffetMapState extends State<BuffetMap> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 CircleButton(
-                  child: Icon(Icons.gps_fixed),
-                  onPressed: () {
-                    print('gps pressed');
-                  },
-                ),
+                    child: Icon(Icons.gps_fixed), onPressed: _onGpsPressed),
                 SizedBox(
                   height: 10,
                 ),
@@ -106,5 +102,14 @@ class _BuffetMapState extends State<BuffetMap> {
   void _onMapCreated(GoogleMapController controller) {
     controller.setMapStyle(MAP_STYLE);
     widget.mapController.complete(controller);
+  }
+
+  _onGpsPressed() async {
+    var controller = await widget.mapController.future;
+    await controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        widget.initialPosition,
+      ),
+    );
   }
 }
