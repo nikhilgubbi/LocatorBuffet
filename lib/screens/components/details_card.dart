@@ -1,8 +1,8 @@
 import 'package:buffetlocator/models/fridge_point.dart';
+import 'package:buffetlocator/screens/components/bottom_tabs.dart';
+import 'package:buffetlocator/screens/components/tag_chip.dart';
 import 'package:buffetlocator/screens/components/tags.dart';
 import 'package:flutter/material.dart';
-
-import 'bottom_tabs.dart';
 
 class DetailsCard extends StatelessWidget {
   const DetailsCard({this.fridge, this.distance});
@@ -12,102 +12,88 @@ class DetailsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
-      child: new Container(
-        child: Wrap(
-          direction: Axis.horizontal,
-          alignment: WrapAlignment.spaceBetween,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(20, 20, 10, 10),
-              child: ClipRRect(
-                borderRadius: new BorderRadius.circular(15.0),
-                child: Image.asset(
-                  'assets/image_1.jpg',
-                  scale: 15,
-                  fit: BoxFit.fill,
+    return new Container(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+//        direction: Axis.horizontal,
+//        alignment: WrapAlignment.spaceBetween,
+//        crossAxisAlignment: WrapCrossAlignment.center,
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 2),
                 ),
+                padding: const EdgeInsets.all(20),
+                child: Icon(Icons.kitchen, size: 48),
               ),
-            ),
-            Wrap(
-              direction: Axis.horizontal,
-              crossAxisAlignment: WrapCrossAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Wrap(
-                    direction: Axis.vertical,
-                    children: [
-                      Text(
-                        "Central Fridge",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "${distance.round()} km",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      RichText(
-                        text: TextSpan(
-                          text: '\n In  ',
-                          style: TextStyle(fontSize: 10),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'Central Park',
-                              style: TextStyle(
-                                  color: Colors.grey[500],
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8, right: 18),
-              child: Wrap(
-                direction: Axis.vertical,
+              SizedBox(
+                width: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  RawChip(
-                    backgroundColor: Colors.white70,
-                    labelStyle: TextStyle(
-                        color: Colors.green,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold),
-                    label: Text('OPEN'),
-                    onPressed: () {
-                      //set Alarm
-                    },
+                  Text(
+                    fridge.name,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  RawChip(
-                    backgroundColor: Colors.white70,
-                    labelStyle: TextStyle(
-                        color: Colors.green,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold),
-                    label: Text('FULL'),
+                  SizedBox(
+                    height: 5,
                   ),
+                  Text(
+                    distance > 1
+                        ? '${distance.toStringAsFixed(2)} km'
+                        : '${(distance * 1000).floor()} m',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: 'In : ',
+                      style: TextStyle(fontSize: 15),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: fridge.locationName,
+                          style: TextStyle(
+                              color: Colors.grey[500],
+                              fontSize: 15,
+                              fontStyle: FontStyle.italic),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
-            ),
-            TagsList(fridge.tags.map((a) => a.toString()).toList()),
-            SizedBox(height: 100),
-            BottomTabsList(),
-          ],
-        ),
-        decoration: BoxDecoration(
-          color: Theme.of(context).canvasColor,
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-          boxShadow: [
-            BoxShadow(blurRadius: 1, color: Colors.black, spreadRadius: 1)
-          ],
-        ),
+              Spacer(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TagChip(
+                    label: fridge.open ? 'OPEN' : 'CLOSE',
+                    color: fridge.open
+                        ? Colors.lightGreenAccent
+                        : Colors.redAccent,
+                    backgroundColor: Colors.transparent,
+                  ),
+                  TagChip(
+                    label: fridge.hasFood ? 'FULL' : 'EMPTY',
+                    color: fridge.hasFood
+                        ? Colors.lightGreenAccent
+                        : Colors.redAccent,
+                    backgroundColor: Colors.transparent,
+                  ),
+                ],
+              )
+            ],
+          ),
+          SizedBox(height: 20),
+          TagsList(fridge.tags.map((a) => a.toString()).toList()),
+        ],
       ),
     );
   }

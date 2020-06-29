@@ -4,8 +4,8 @@ import 'package:buffetlocator/screens/components/tag_chip.dart';
 import 'package:buffetlocator/screens/components/tags.dart';
 import 'package:flutter/material.dart';
 
-class DonateCard extends StatelessWidget {
-  const DonateCard({this.fridge});
+class AvailabilityCard extends StatelessWidget {
+  const AvailabilityCard({this.fridge});
 
   final FridgePoint fridge;
 
@@ -25,7 +25,7 @@ class DonateCard extends StatelessWidget {
                   border: Border.all(color: Colors.white, width: 2),
                 ),
                 padding: const EdgeInsets.all(20),
-                child: Icon(Icons.card_giftcard, size: 48),
+                child: Icon(Icons.access_time, size: 48),
               ),
               SizedBox(
                 width: 10,
@@ -34,14 +34,14 @@ class DonateCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Donate',
+                    'Availability',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Donate items to this fridge',
+                    'Opening and closing times',
                     style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
@@ -53,28 +53,10 @@ class DonateCard extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Flexible(
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                ["Fridge", Icons.kitchen],
-                ["Space", Icons.local_convenience_store],
-                ["Money", Icons.monetization_on],
-                ["Food", Icons.fastfood],
-              ]
-                  .map(
-                    (i) => Card(
-                      clipBehavior: Clip.antiAlias,
-                      shape: StadiumBorder(),
-                      child: ListTile(
-                        title: Text(i[0], style: TextStyle(fontSize: 16)),
-                        leading: Icon(i[1]),
-                        onTap: (){},
-                      ),
-                    ),
-                  )
-                  .toList(),
+            child: Center(
+              child: Text('THIS FEATURE IS COMING SOON...'),
             ),
-          )
+          ),
         ],
       ),
     );

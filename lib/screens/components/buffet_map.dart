@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:buffetlocator/misc/helpers.dart';
 import 'package:buffetlocator/models/fridge_point.dart';
-import 'package:buffetlocator/screens/components/comments_card.dart';
+import 'package:buffetlocator/screens/components/circle_button.dart';
 import 'package:buffetlocator/screens/components/details_card.dart';
 import 'package:buffetlocator/screens/components/donate_card.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +10,21 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:buffetlocator/misc/map_style.dart';
 
+import '../../models/fridge_point.dart';
+
 class BuffetMap extends StatefulWidget {
-  const BuffetMap(
-      {Key key,
-      @required this.fridges,
-      @required this.initialPosition,
-      @required this.mapController})
-      : super(key: key);
+  const BuffetMap({
+    Key key,
+    @required this.fridges,
+    @required this.initialPosition,
+    @required this.mapController,
+    @required this.onFridgeTapped,
+  }) : super(key: key);
 
   final List<FridgePoint> fridges;
   final CameraPosition initialPosition;
   final Completer<GoogleMapController> mapController;
+  final ValueChanged<FridgePoint> onFridgeTapped;
 
   @override
   _BuffetMapState createState() => _BuffetMapState();
@@ -43,27 +47,56 @@ class _BuffetMapState extends State<BuffetMap> {
 
   @override
   Widget build(BuildContext context) {
-    return GoogleMap(
-      initialCameraPosition: widget.initialPosition,
-      mapType: MapType.normal,
-      zoomControlsEnabled: false,
-      markers: widget.fridges
-          .map(
-            (fridge) => Marker(
-                markerId: MarkerId(fridge.placeId),
-                icon: _markerIcon,
-                position: LatLng(
-                  fridge.location.latitude,
-                  fridge.location.longitude,
+    return Stack(
+      children: <Widget>[
+        GoogleMap(
+          initialCameraPosition: widget.initialPosition,
+          mapType: MapType.normal,
+          zoomControlsEnabled: false,
+          markers: widget.fridges == null
+              ? Set<Marker>()
+              : widget.fridges
+                  .map(
+                    (fridge) => Marker(
+                      markerId: MarkerId(fridge.placeId),
+                      icon: _markerIcon,
+                      position: LatLng(
+                        fridge.location.latitude,
+                        fridge.location.longitude,
+                      ),
+                      infoWindow: InfoWindow(
+                        title: fridge.name,
+                        snippet: fridge.locationName,
+                      ),
+                      onTap: () => widget.onFridgeTapped(fridge),
+                    ),
+                  )
+                  .toSet(),
+          onMapCreated: _onMapCreated,
+        ),
+        Align(
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 120.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                CircleButton(
+                    child: Icon(Icons.gps_fixed), onPressed: _onGpsPressed),
+                SizedBox(
+                  height: 10,
                 ),
-                infoWindow: InfoWindow(
-                  title: fridge.name,
-                  snippet: fridge.notes,
+                CircleButton(
+                  child: Icon(Icons.menu),
+                  onPressed: () {
+                    print('menu pressed');
+                  },
                 ),
-                onTap: () => _onFridgeTapped(fridge)),
-          )
-          .toSet(),
-      onMapCreated: _onMapCreated,
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 
@@ -72,44 +105,12 @@ class _BuffetMapState extends State<BuffetMap> {
     widget.mapController.complete(controller);
   }
 
-  Set<Marker> _getMarkers(List<FridgePoint> points) {
-    return points
-        .map(
-          (fridge) => Marker(
-            markerId: MarkerId(fridge.hashCode.toString()),
-            position:
-                LatLng(fridge.location.latitude, fridge.location.longitude),
-            icon: BitmapDescriptor.defaultMarker,
-            infoWindow: InfoWindow(title: fridge.name),
-            onTap: () => _onFridgeTapped(fridge),
-          ),
-        )
-        .toSet();
-  }
-
-  void _onFridgeTapped(FridgePoint fridge) async {
-    print(fridge);
-    final distance = await getDistance(widget.initialPosition.target,
-        LatLng(fridge.location.latitude, fridge.location.longitude));
-    print('Distance from current location: $distance');
-  
-
-    showModalBottomSheet(
-      backgroundColor: Colors.transparent,
-      enableDrag: true,
-      context: context,
-      builder: (context) => Container(
-        height: 300,
-        child: PageView(children: [
-          DetailsCard(
-          fridge: fridge,
-          distance: distance,
-        ),
-        CommentsCard(),
-        DonateCard()
-        ],
-        ),
-      )
+  _onGpsPressed() async {
+    var controller = await widget.mapController.future;
+    await controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        widget.initialPosition,
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:buffetlocator/screens/components/tag_chip.dart';
 import 'package:flutter/material.dart';
 
 class TagsList extends StatelessWidget {
@@ -12,7 +13,11 @@ class TagsList extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: tags.length,
-        itemBuilder: (context, index) => TagCard(tag: tags[index]),
+        itemBuilder: (context, index) => TagChip(
+          label: tags[index],
+          color: Colors.white,
+          backgroundColor: Colors.transparent,
+        ),
       ),
     );
   }
@@ -22,6 +27,7 @@ class TagCard extends StatelessWidget {
   final String tag;
 
   const TagCard({Key key, this.tag}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +36,7 @@ class TagCard extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white.withOpacity(0.8)),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(50),
       ),
       child: Text(
         tag,

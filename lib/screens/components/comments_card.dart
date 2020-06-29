@@ -1,38 +1,76 @@
+import 'package:buffetlocator/models/fridge_point.dart';
 import 'package:buffetlocator/screens/components/bottom_tabs.dart';
+import 'package:buffetlocator/screens/components/tag_chip.dart';
+import 'package:buffetlocator/screens/components/tags.dart';
 import 'package:flutter/material.dart';
 
 class CommentsCard extends StatelessWidget {
+  const CommentsCard({this.fridge});
+
+  final FridgePoint fridge;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.amber,
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-          boxShadow: [
-            BoxShadow(blurRadius: 1, color: Colors.black, spreadRadius: 1)
-          ],
-        ),
-        child: Wrap(
-          direction: Axis.horizontal,
-          alignment: WrapAlignment.spaceBetween,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-              child: Text(
-                'On the right in front of the gap',
-                style: TextStyle(
-                    color: Colors.grey[600],
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600),
+    return new Container(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 2),
+                ),
+                padding: const EdgeInsets.all(20),
+                child: Icon(Icons.comment, size: 48),
               ),
+              SizedBox(
+                width: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Comments',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Public comments on this fridge',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.grey[500]),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Flexible(
+            child: ListView.builder(
+              itemCount: fridge.comments.length,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (ctx, i) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Text(fridge.comments[i].toString()),
+                    ),
+                    Divider(),
+                  ],
+                );
+              },
             ),
-            SizedBox(height: 242,),
-            BottomTabsList(),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
