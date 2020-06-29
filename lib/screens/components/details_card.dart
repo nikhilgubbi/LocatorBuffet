@@ -95,7 +95,11 @@ class DetailsCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('SERVED: ${fridge.usedCount}'),
+              TagChip(
+                label: 'SERVED: ${fridge.usedCount}',
+                backgroundColor: Colors.transparent,
+                color: Colors.lightGreenAccent,
+              ),
               Column(
                 children: [
                   IconButton(
