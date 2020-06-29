@@ -70,12 +70,10 @@ class CarouselList extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               clipBehavior: Clip.hardEdge,
-              child: Center(
-                child: FridgeListTile(
-                  fridge: fridges[index],
-                  mapController: mapController,
-                  onTapped: () => onTileTapped(index),
-                ),
+              child: FridgeListTile(
+                fridge: fridges[index],
+                mapController: mapController,
+                onTapped: () => onTileTapped(index),
               ),
             ),
           ),
