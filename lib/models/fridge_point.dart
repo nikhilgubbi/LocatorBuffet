@@ -8,6 +8,9 @@ class FridgePoint {
   int usedCount; // how many times used
   String notes; // misc notes
   String imageUrl;
+  String locationName;
+  double ratings;
+  List comments;
   GeoPoint location;
   List tags;
   List foodItems;
@@ -21,6 +24,9 @@ class FridgePoint {
       this.notes,
       this.imageUrl,
       this.location,
+      this.locationName,
+        this.ratings,
+        this.comments,
       this.tags,
       this.foodItems});
 
@@ -35,6 +41,9 @@ class FridgePoint {
       notes: point['notes'] ?? '',
       imageUrl: point['imageUrl'] ?? '',
       location: point['location'] ?? null,
+      locationName: point['locationName'] ?? '',
+      ratings: double.tryParse(point['ratings']) ?? 3.5,
+      comments: point['comments'] ?? [],
       tags: point['tags'] ?? [],
       foodItems: point['foodItems'] ?? [],
     );
@@ -51,6 +60,9 @@ class FridgePoint {
       notes: point['notes'] ?? '',
       imageUrl: point['imageUrl'] ?? '',
       location: point['location'] ?? GeoPoint(0, 0),
+      locationName: point['locationName'] ?? '',
+      ratings: double.tryParse(point['ratings']) ?? 3.5,
+      comments: point['comments'] ?? [],
       tags: point['tags'] ?? [],
       foodItems: point['foodItems'] ?? [],
     );

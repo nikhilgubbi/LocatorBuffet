@@ -27,6 +27,9 @@ class _PageViewCardState extends State<PageViewCard> {
   PageController _controller;
   int _selectedIndex = 0;
 
+  Duration _duration = Duration(milliseconds: 500);
+  Curve _curve = Curves.easeInOut;
+
   bool _isScrolling;
 
   List<GlobalKey> keys;
@@ -107,7 +110,15 @@ class _PageViewCardState extends State<PageViewCard> {
     if (metrics is PageMetrics) {
       setState(() => _selectedIndex = metrics.page.round());
       if (widget.autoScrollTabs)
-        Scrollable.ensureVisible(keys[_selectedIndex].currentContext);
+        try {
+          Scrollable.ensureVisible(
+            keys[_selectedIndex].currentContext,
+            duration: Duration(milliseconds: 200),
+            curve: Curves.ease,
+          );
+        } catch(e) {
+          print(e);
+        }
     }
     return false;
   }
@@ -116,8 +127,8 @@ class _PageViewCardState extends State<PageViewCard> {
     setState(() => _isScrolling = true);
     await _controller.animateToPage(
       page,
-      duration: Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
+      duration: _duration,
+      curve: _curve,
     );
     setState(() => _isScrolling = false);
   }

@@ -1,11 +1,10 @@
 import 'package:buffetlocator/models/fridge_point.dart';
-import 'package:buffetlocator/screens/components/bottom_tabs.dart';
-import 'package:buffetlocator/screens/components/tag_chip.dart';
-import 'package:buffetlocator/screens/components/tags.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:flutter/material.dart';
 
-class DonateCard extends StatelessWidget {
-  const DonateCard({this.fridge});
+class RatingCard extends StatelessWidget {
+  const RatingCard({this.fridge});
 
   final FridgePoint fridge;
 
@@ -13,6 +12,7 @@ class DonateCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       padding: const EdgeInsets.all(8),
+//        color: Colors.red,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -25,7 +25,7 @@ class DonateCard extends StatelessWidget {
                   border: Border.all(color: Colors.white, width: 2),
                 ),
                 padding: const EdgeInsets.all(20),
-                child: Icon(Icons.card_giftcard, size: 48),
+                child: Icon(Icons.star_half, size: 48),
               ),
               SizedBox(
                 width: 10,
@@ -34,14 +34,14 @@ class DonateCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Donate',
+                    'Ratings',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Donate items to this fridge',
+                    'Overall ratings',
                     style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
@@ -52,28 +52,20 @@ class DonateCard extends StatelessWidget {
             ],
           ),
           SizedBox(height: 20),
-          Flexible(
-            child: ListView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                ["Fridge", Icons.kitchen],
-                ["Space", Icons.local_convenience_store],
-                ["Money", Icons.monetization_on],
-                ["Food", Icons.fastfood],
-              ]
-                  .map(
-                    (i) => Card(
-                      clipBehavior: Clip.antiAlias,
-                      shape: StadiumBorder(),
-                      child: ListTile(
-                        title: Text(i[0], style: TextStyle(fontSize: 16)),
-                        leading: Icon(i[1]),
-                        onTap: (){},
-                      ),
-                    ),
-                  )
-                  .toList(),
+          RatingBar(
+            initialRating: fridge.ratings,
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => Icon(
+              Icons.star,
+              color: Colors.lightGreenAccent,
             ),
+            onRatingUpdate: (rating) {},
+            glow: false,
+            ignoreGestures: true,
           )
         ],
       ),

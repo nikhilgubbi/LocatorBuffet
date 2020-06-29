@@ -65,7 +65,7 @@ class _BuffetMapState extends State<BuffetMap> {
                       ),
                       infoWindow: InfoWindow(
                         title: fridge.name,
-                        snippet: fridge.notes,
+                        snippet: fridge.locationName,
                       ),
                       onTap: () => widget.onFridgeTapped(fridge),
                     ),

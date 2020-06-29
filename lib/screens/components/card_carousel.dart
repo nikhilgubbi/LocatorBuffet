@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:buffetlocator/misc/api_key.dart';
 import 'package:buffetlocator/models/fridge_point.dart';
+import 'package:buffetlocator/screens/components/tag_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -57,6 +58,7 @@ class CarouselList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
       itemCount: fridges == null ? 0 : fridges.length,
       itemBuilder: (context, index) {
         return SizedBox(
@@ -64,7 +66,7 @@ class CarouselList extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 8),
             child: Card(
-              elevation: 2,
+              elevation: 3,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               clipBehavior: Clip.hardEdge,
@@ -156,7 +158,7 @@ class _FridgeListTileState extends State<FridgeListTile> {
   Widget build(BuildContext context) {
     return ListTile(
         title: Text(widget.fridge.name),
-        subtitle: Text(widget.fridge.name),
+        subtitle: Text(widget.fridge.notes),
         leading: Container(
           width: 64,
           height: 64,
@@ -168,12 +170,10 @@ class _FridgeListTileState extends State<FridgeListTile> {
             ),
           ),
         ),
-        trailing: RawChip(
-          label: Text('SERVED: ${widget.fridge.usedCount}'),
+        trailing: TagChip(
+          label: 'SERVED: ${widget.fridge.usedCount}',
           backgroundColor: Colors.transparent,
-          shape: StadiumBorder(
-            side: BorderSide(color: Colors.lightGreenAccent),
-          ),
+          color: Colors.lightGreenAccent,
         ),
         onTap: widget.onTapped);
   }

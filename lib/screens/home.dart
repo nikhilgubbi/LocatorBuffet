@@ -1,9 +1,14 @@
 import 'dart:async';
 
 import 'package:buffetlocator/models/fridge_point.dart';
+import 'package:buffetlocator/screens/components/associates_card.dart';
+import 'package:buffetlocator/screens/components/availablity_card.dart';
 import 'package:buffetlocator/screens/components/comments_card.dart';
+import 'package:buffetlocator/screens/components/details_card.dart';
 import 'package:buffetlocator/screens/components/donate_card.dart';
+import 'package:buffetlocator/screens/components/inventory_card.dart';
 import 'package:buffetlocator/screens/components/page_view_card.dart';
+import 'package:buffetlocator/screens/components/rating_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:buffetlocator/screens/components/buffet_map.dart';
@@ -11,9 +16,6 @@ import 'package:buffetlocator/screens/components/card_carousel.dart';
 import 'package:provider/provider.dart';
 
 import '../misc/helpers.dart';
-import 'components/details_card.dart';
-import 'components/details_card.dart';
-import 'components/details_card.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -61,82 +63,55 @@ class _HomePageState extends State<HomePage> {
     print('Distance from current location: $distance');
 
     showModalBottomSheet(
-      enableDrag: true,
-      context: context,
-      backgroundColor: Colors.transparent,
-
+        enableDrag: true,
+        context: context,
+        backgroundColor: Colors.transparent,
         builder: (context) => PageViewCard(
-          autoScrollTabs: false,
-          scrollable: true,
-          items: [
-            PageViewItem(
-              title: 'DETAILS',
-              content: DetailsCard(
-                fridge: fridge,
-                distance: distance,
-              ),
-            ),
-            PageViewItem(
-              title: 'INVENTORY',
-              content: Center(
-                child: Text('THIS FEATURE IS COMING SOON...'),
-              ),
-            ),
-            PageViewItem(
-              title: 'RATINGS',
-              content: Center(
-                child: Text('THIS FEATURE IS COMING SOON...'),
-              ),
-            ),
-            PageViewItem(
-              title: 'COMMENTS',
-              content: Center(
-                child: CommentsCard(),
-              ),
-            ),
-
-            PageViewItem(
-              title: 'AVAILABILITY',
-              content: Center(
-                child: Text('THIS FEATURE IS COMING SOON...'),
-              ),
-            ),
-            PageViewItem(
-              title: 'RATING',
-              content: Center(
-                child: Text('THIS FEATURE IS COMING SOON...'),
-              ),
-            ),
-            PageViewItem(
-              title: 'ASSOCIATES',
-              content: Center(
-                child: Text('THIS FEATURE IS COMING SOON...'),
-              ),
-            ),
-            PageViewItem(
-              title: 'DONATE',
-              content: Center(
-                child: DonateCard(),
-              ),
-            ),
-          ],
-        )
-//      builder: (context) => DetailsCard(
-//        fridge: fridge,
-//        distance: distance,
-//      ),
-
-//        builder:  (context) => PageView(
-//
-//        children: <Widget>[
-//          DetailsCard(
-//            fridge: fridge,
-//            distance: distance,
-//          ),
-//          CommentsCard(),
-//          DonateCard(),
-//        ],
-//      ),
-    );
+              autoScrollTabs: true,
+              scrollable: true,
+              items: [
+                PageViewItem(
+                  title: 'DETAILS',
+                  content: DetailsCard(
+                    fridge: fridge,
+                    distance: distance,
+                  ),
+                ),
+                PageViewItem(
+                  title: 'INVENTORY',
+                  content: Center(
+                    child: InventoryCard(fridge: fridge),
+                  ),
+                ),
+                PageViewItem(
+                  title: 'RATINGS',
+                  content: Center(
+                    child: RatingCard(fridge: fridge),
+                  ),
+                ),
+                PageViewItem(
+                  title: 'COMMENTS',
+                  content: Center(
+                    child: CommentsCard(
+                      fridge: fridge,
+                    ),
+                  ),
+                ),
+                PageViewItem(
+                  title: 'DONATE',
+                  content: Center(
+                    child: DonateCard(fridge: fridge),
+                  ),
+                ),
+                PageViewItem(
+                  title: 'AVAILABILITY',
+                  content: AvailabilityCard(fridge: fridge),
+                ),
+                PageViewItem(
+                  title: 'ASSOCIATES',
+                  content: AssociatesCard(fridge: fridge),
+                ),
+              ],
+            ));
   }
 }
