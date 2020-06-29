@@ -40,7 +40,7 @@ class _BuffetMapState extends State<BuffetMap> {
 
   _setMarkerIcon() async {
     _markerIcon = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(), 'assets/fridge.png');
+        ImageConfiguration(), 'assets/marker.png');
     setState(() {});
   }
 
