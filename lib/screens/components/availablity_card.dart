@@ -53,11 +53,67 @@ class AvailabilityCard extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Flexible(
-            child: Center(
-              child: Text('THIS FEATURE IS COMING SOON...'),
+            child: ListView(
+              children: [
+                AvailabilityTile(
+                  day: 'Thanks Giving',
+                  startTime: '9 AM',
+                  endTime: '9 PM',
+                ),
+                AvailabilityTile(
+                  day: 'Monday - Thursday',
+                  startTime: '9 AM',
+                  endTime: '9 PM',
+                ),
+                AvailabilityTile(
+                  day: 'Friday',
+                  startTime: '9 AM',
+                  endTime: '11:30 PM',
+                ),
+              ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class AvailabilityTile extends StatelessWidget {
+  final String startTime;
+  final String endTime;
+  final String day;
+
+  const AvailabilityTile({Key key, this.startTime, this.endTime, this.day})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.green, width: 1),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                day,
+                style: TextStyle(fontSize: 18),
+              ),
+              Text(
+                '$startTime - $endTime',
+                style: TextStyle(fontSize: 18),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
