@@ -1,7 +1,6 @@
 import 'package:buffetlocator/models/fridge_point.dart';
 import 'package:buffetlocator/screens/home.dart';
 import 'package:buffetlocator/services/firestore.dart';
-import 'package:buffetlocator/services/mock.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
