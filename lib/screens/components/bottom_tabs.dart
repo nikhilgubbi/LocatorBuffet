@@ -1,50 +1,104 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class BottomTabsList extends StatelessWidget {
+class BottomTabsList extends StatefulWidget {
+  @override
+  _BottomTabsListState createState() => _BottomTabsListState();
+}
+
+class _BottomTabsListState extends State<BottomTabsList> {
   List<String> bottom_tabs = [
-    "DEAILS",
-    "INVENTORY",
-    "RATINGS",
     "DETAILS",
     "INVENTORY",
+    "RATINGS",
     "COMMENT",
     "AVAILABILITY",
     "RATING",
     "ASSOCIATES",
   ];
 
+  bool _selected = false;
+  int selectedIndex = -1;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 30,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: bottom_tabs.length,
-          itemBuilder: (context, index) {
-            return BottomTabCard(bottom_tab: bottom_tabs[index]);
-          }),
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 30,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: bottom_tabs.length,
+              itemBuilder: (context, index) {
+                return BottomTabCard(
+                  label: bottom_tabs[index],
+                  color: selectedIndex == index
+                      ? Colors.lightGreenAccent
+                      : Colors.white,
+                  backgroundColor: selectedIndex == index
+                      ? Colors.white30
+                      : Colors.transparent,
+                  onPressed: () {
+                    print(bottom_tabs[index]);
+                    if (selectedIndex == index) {
+                      selectedIndex = -1;
+                      _selected = false;
+                    } else {
+                      selectedIndex = index;
+                      _selected = true;
+                    }
+//                    _selected = !_selected;
+                    setState(() {});
+                  },
+                );
+              }),
+        ),
+        SizedBox(height: 20),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          height: _selected ? 200 : 0,
+          child: Center(
+            child: Text(
+              'COMING SOON...',
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        )
+      ],
     );
   }
 }
 
 class BottomTabCard extends StatelessWidget {
-  final String bottom_tab;
+  final String label;
+  final Color color;
+  final Color backgroundColor;
+  final Function onPressed;
 
-  const BottomTabCard({Key key, this.bottom_tab}) : super(key: key);
+  const BottomTabCard(
+      {Key key, this.label, this.color, this.backgroundColor, this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-        child: Container(
-          width: 100,
-          margin: EdgeInsets.all(3),
-          alignment: Alignment.center,
-          child: Text(
-            bottom_tab,
-            style:
-                TextStyle(color: Colors.green.withOpacity(0.8), fontSize: 15),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: ActionChip(
+        backgroundColor: backgroundColor,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        label: Text(
+          label,
+          style: TextStyle(
+            color: color,
+            fontWeight: FontWeight.w500
           ),
         ),
-        onTap: () => print("${bottom_tab.toString()}"));
+        shape: StadiumBorder(
+          side: BorderSide(color: Colors.transparent, width: 0),
+        ),
+        onPressed: onPressed,
+      ),
+    );
   }
 }

@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:buffetlocator/models/fridge_point.dart';
+import 'package:buffetlocator/screens/components/comments_card.dart';
+import 'package:buffetlocator/screens/components/donate_card.dart';
+import 'package:buffetlocator/screens/components/page_view_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:buffetlocator/screens/components/buffet_map.dart';
@@ -8,6 +11,8 @@ import 'package:buffetlocator/screens/components/card_carousel.dart';
 import 'package:provider/provider.dart';
 
 import '../misc/helpers.dart';
+import 'components/details_card.dart';
+import 'components/details_card.dart';
 import 'components/details_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,16 +40,14 @@ class _HomePageState extends State<HomePage> {
         body: Stack(
           children: [
             BuffetMap(
-              initialPosition: _initialCamerPosition,
-              mapController: mapController,
-              fridges: context.watch<List<FridgePoint>>(),
-              onFridgeTapped: _onFridgeTapped
-            ),
+                initialPosition: _initialCamerPosition,
+                mapController: mapController,
+                fridges: context.watch<List<FridgePoint>>(),
+                onFridgeTapped: _onFridgeTapped),
             FridgeCarousel(
-              mapController: mapController,
-              fridges: context.watch<List<FridgePoint>>(),
-              onFridgeTapped: _onFridgeTapped
-            ),
+                mapController: mapController,
+                fridges: context.watch<List<FridgePoint>>(),
+                onFridgeTapped: _onFridgeTapped),
           ],
         ),
       ),
@@ -60,10 +63,80 @@ class _HomePageState extends State<HomePage> {
     showModalBottomSheet(
       enableDrag: true,
       context: context,
-      builder: (context) => DetailsCard(
-        fridge: fridge,
-        distance: distance,
-      ),
+      backgroundColor: Colors.transparent,
+
+        builder: (context) => PageViewCard(
+          autoScrollTabs: false,
+          scrollable: true,
+          items: [
+            PageViewItem(
+              title: 'DETAILS',
+              content: DetailsCard(
+                fridge: fridge,
+                distance: distance,
+              ),
+            ),
+            PageViewItem(
+              title: 'INVENTORY',
+              content: Center(
+                child: Text('THIS FEATURE IS COMING SOON...'),
+              ),
+            ),
+            PageViewItem(
+              title: 'RATINGS',
+              content: Center(
+                child: Text('THIS FEATURE IS COMING SOON...'),
+              ),
+            ),
+            PageViewItem(
+              title: 'COMMENTS',
+              content: Center(
+                child: CommentsCard(),
+              ),
+            ),
+
+            PageViewItem(
+              title: 'AVAILABILITY',
+              content: Center(
+                child: Text('THIS FEATURE IS COMING SOON...'),
+              ),
+            ),
+            PageViewItem(
+              title: 'RATING',
+              content: Center(
+                child: Text('THIS FEATURE IS COMING SOON...'),
+              ),
+            ),
+            PageViewItem(
+              title: 'ASSOCIATES',
+              content: Center(
+                child: Text('THIS FEATURE IS COMING SOON...'),
+              ),
+            ),
+            PageViewItem(
+              title: 'DONATE',
+              content: Center(
+                child: DonateCard(),
+              ),
+            ),
+          ],
+        )
+//      builder: (context) => DetailsCard(
+//        fridge: fridge,
+//        distance: distance,
+//      ),
+
+//        builder:  (context) => PageView(
+//
+//        children: <Widget>[
+//          DetailsCard(
+//            fridge: fridge,
+//            distance: distance,
+//          ),
+//          CommentsCard(),
+//          DonateCard(),
+//        ],
+//      ),
     );
   }
 }
