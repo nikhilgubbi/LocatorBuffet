@@ -10,18 +10,6 @@ class AssociatesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    List<String> associates = [
-      "DETAILS",
-      "INVENTORY",
-      "RATINGS",
-      "COMMENT",
-      "AVAILABILITY",
-      "RATING",
-      "ASSOCIATES",
-    ];
-
-    bool _selected = false;
-    int selectedIndex = -1;
     return new Container(
       padding: const EdgeInsets.all(8),
       child: Column(
@@ -45,14 +33,14 @@ class AssociatesCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Associates',
+                    'Donors',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Details of associates',
+                    'Details of the donors',
                     style: TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
@@ -64,33 +52,27 @@ class AssociatesCard extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Flexible(
-            child:
-            ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: associates.length,
-                itemBuilder: (context, index) {
-                  return BottomTabCard(
-                    label: associates[index],
-                    color: selectedIndex == index
-                        ? Colors.lightGreenAccent
-                        : Colors.white,
-                    backgroundColor: selectedIndex == index
-                        ? Colors.white30
-                        : Colors.transparent,
-                    onPressed: () {
-                      print(associates[index]);
-                      if (selectedIndex == index) {
-                        selectedIndex = -1;
-                        _selected = false;
-                      } else {
-                        selectedIndex = index;
-                        _selected = true;
-                      }
-
-                    },
-                  );
-                }),
-
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                ["Duos Marketing", Icons.local_atm, Colors.deepPurpleAccent],
+                ["Dine with Smith", Icons.fastfood, Colors.teal],
+                ["Jasper Flights", Icons.airplanemode_active, Colors.orangeAccent],
+              ]
+                  .map(
+                    (i) => Card(
+                      clipBehavior: Clip.antiAlias,
+                      color: i[2],
+                      shape: StadiumBorder(),
+                      child: ListTile(
+                        title: Text(i[0], style: TextStyle(fontSize: 16)),
+                        leading: Icon(i[1]),
+                        onTap: () {},
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
           )
         ],
       ),

@@ -10,14 +10,19 @@ class TagsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: tags.length,
-        itemBuilder: (context, index) => TagChip(
-          label: tags[index],
-          color: Colors.white,
-          backgroundColor: Colors.transparent,
-        ),
+      child: Wrap(
+        direction: Axis.horizontal,
+        crossAxisAlignment: WrapCrossAlignment.start,
+        children: tags
+            .map((tag) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                  child: TagChip(
+                    label: tag,
+                    color: Colors.white,
+                    backgroundColor: Colors.transparent,
+                  ),
+                ))
+            .toList(),
       ),
     );
   }

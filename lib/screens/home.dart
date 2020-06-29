@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                   content: AvailabilityCard(fridge: fridge),
                 ),
                 PageViewItem(
-                  title: 'ASSOCIATES',
+                  title: 'DONORS',
                   content: AssociatesCard(fridge: fridge),
                 ),
               ],

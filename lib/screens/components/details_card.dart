@@ -17,7 +17,7 @@ class DetailsCard extends StatelessWidget {
       child: Column(
 //        direction: Axis.horizontal,
 //        alignment: WrapAlignment.spaceBetween,
-//        crossAxisAlignment: WrapCrossAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,32 +93,56 @@ class DetailsCard extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TagChip(
                 label: 'SERVED: ${fridge.usedCount}',
                 backgroundColor: Colors.transparent,
                 color: Colors.lightGreenAccent,
               ),
-              Column(
-                children: [
-                  MaterialButton(
-                    child: Icon(
-                      Icons.directions,
-                      color: Colors.lightGreenAccent,
-                      size: 32,
-                    ),
-                    onPressed: null,
-                  ),
-                  Text(
-                    'Directions',
-                    style: TextStyle(color: Colors.lightGreenAccent),
-                  ),
-                ],
-              )
+//              Column(
+//                children: [
+//                  MaterialButton(
+//                    child: Icon(
+//                      Icons.directions,
+//                      color: Colors.lightGreenAccent,
+//                      size: 32,
+//                    ),
+//                    onPressed: null,
+//                  ),
+//                  Text(
+//                    'Directions',
+//                    style: TextStyle(color: Colors.lightGreenAccent),
+//                  ),
+//                ],
+//              )
             ],
           ),
-          TagsList(fridge.tags.map((a) => a.toString()).toList()),
+          Flexible(child: TagsList(fridge.tags.map((a) => a.toString()).toList())),
+          Flexible(
+            child: Center(
+              child: FlatButton(
+                color: Colors.lightGreenAccent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.directions,
+                      color: Colors.black87,
+                    ),
+                    SizedBox(width: 10,),
+                    Text(
+                      'Directions',
+                      style: TextStyle(color: Colors.black87, fontSize: 16),
+                    )
+                  ],
+                ),
+                onPressed: () {},
+                shape: StadiumBorder(),
+//                borderSide: BorderSide(color: Colors.lightGreenAccent),
+              ),
+            ),
+          )
         ],
       ),
     );
