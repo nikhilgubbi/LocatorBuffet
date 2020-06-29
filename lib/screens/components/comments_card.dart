@@ -57,15 +57,12 @@ class CommentsCard extends StatelessWidget {
               itemCount: fridge.comments.length,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (ctx, i) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: Text(fridge.comments[i].toString()),
-                    ),
-                    Divider(),
-                  ],
+                return ListTile(
+                  title: Container(
+                    color: Colors.grey[800],
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(fridge.comments[i].toString()),
+                  ),
                 );
               },
             ),
