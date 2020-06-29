@@ -102,12 +102,18 @@ class DetailsCard extends StatelessWidget {
               ),
               Column(
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.directions),
+                  MaterialButton(
+                    child: Icon(
+                      Icons.directions,
+                      color: Colors.lightGreenAccent,
+                      size: 32,
+                    ),
                     onPressed: null,
-                    iconSize: 50,
                   ),
-                  Text('Directions'),
+                  Text(
+                    'Directions',
+                    style: TextStyle(color: Colors.lightGreenAccent),
+                  ),
                 ],
               )
             ],
