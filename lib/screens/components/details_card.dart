@@ -92,6 +92,22 @@ class DetailsCard extends StatelessWidget {
             ],
           ),
           SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text('SERVED: ${fridge.usedCount}'),
+              Column(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.directions),
+                    onPressed: null,
+                    iconSize: 50,
+                  ),
+                  Text('Directions'),
+                ],
+              )
+            ],
+          ),
           TagsList(fridge.tags.map((a) => a.toString()).toList()),
         ],
       ),
