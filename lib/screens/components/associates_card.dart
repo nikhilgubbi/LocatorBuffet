@@ -1,7 +1,5 @@
 import 'package:buffetlocator/models/fridge_point.dart';
-import 'package:buffetlocator/screens/components/bottom_tabs.dart';
-import 'package:buffetlocator/screens/components/tag_chip.dart';
-import 'package:buffetlocator/screens/components/tags.dart';
+import 'package:buffetlocator/screens/components/associate_tabs.dart';
 import 'package:flutter/material.dart';
 
 class AssociatesCard extends StatelessWidget {
@@ -11,6 +9,19 @@ class AssociatesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    List<String> associates = [
+      "DETAILS",
+      "INVENTORY",
+      "RATINGS",
+      "COMMENT",
+      "AVAILABILITY",
+      "RATING",
+      "ASSOCIATES",
+    ];
+
+    bool _selected = false;
+    int selectedIndex = -1;
     return new Container(
       padding: const EdgeInsets.all(8),
       child: Column(
@@ -53,10 +64,34 @@ class AssociatesCard extends StatelessWidget {
           ),
           SizedBox(height: 20),
           Flexible(
-            child: Center(
-              child: Text('THIS FEATURE IS COMING SOON...'),
-            ),
-          ),
+            child:
+            ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: associates.length,
+                itemBuilder: (context, index) {
+                  return BottomTabCard(
+                    label: associates[index],
+                    color: selectedIndex == index
+                        ? Colors.lightGreenAccent
+                        : Colors.white,
+                    backgroundColor: selectedIndex == index
+                        ? Colors.white30
+                        : Colors.transparent,
+                    onPressed: () {
+                      print(associates[index]);
+                      if (selectedIndex == index) {
+                        selectedIndex = -1;
+                        _selected = false;
+                      } else {
+                        selectedIndex = index;
+                        _selected = true;
+                      }
+
+                    },
+                  );
+                }),
+
+          )
         ],
       ),
     );
