@@ -49,6 +49,7 @@ class _BuffetMapState extends State<BuffetMap> {
     return Stack(
       children: <Widget>[
         GoogleMap(
+          mapToolbarEnabled: false,
           initialCameraPosition: widget.initialPosition,
           mapType: MapType.normal,
           zoomControlsEnabled: false,
