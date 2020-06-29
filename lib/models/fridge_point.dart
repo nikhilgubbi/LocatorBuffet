@@ -25,8 +25,8 @@ class FridgePoint {
       this.imageUrl,
       this.location,
       this.locationName,
-        this.ratings,
-        this.comments,
+      this.ratings,
+      this.comments,
       this.tags,
       this.foodItems});
 
@@ -59,12 +59,12 @@ class FridgePoint {
       usedCount: point['usedCount'] ?? 0,
       notes: point['notes'] ?? '',
       imageUrl: point['imageUrl'] ?? '',
-      location: point['location'] ?? GeoPoint(0, 0),
+      location: point['location'] ?? GeoPoint(40.6710, -74.2571),
       locationName: point['locationName'] ?? '',
       ratings: double.tryParse(point['ratings']) ?? 3.5,
-      comments: point['comments'] ?? [],
-      tags: point['tags'] ?? [],
-      foodItems: point['foodItems'] ?? [],
+      comments: point['comments'] ?? ['Great place !'],
+      tags: point['tags'] ?? ['Indoor'],
+      foodItems: point['foodItems'] ?? ['Pizza'],
     );
   }
 }
