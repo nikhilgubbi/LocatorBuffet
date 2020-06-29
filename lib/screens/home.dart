@@ -27,13 +27,8 @@ class _HomePageState extends State<HomePage> {
 
   CameraPosition _initialCamerPosition = CameraPosition(
     target: LatLng(40.7128, -74.0060),
-    zoom: 13.0,
+    zoom: 11.0,
   );
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
