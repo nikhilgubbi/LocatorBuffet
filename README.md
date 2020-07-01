@@ -1,4 +1,4 @@
-BuffetLocator  
+Buffet Locator  
 =========
 [![Twitter Follow](https://img.shields.io/twitter/follow/locatorbuffet.svg?style=social)](https://twitter.com/locatorbuffet)
 ## https://locatorbuffet.com/
@@ -34,15 +34,3 @@ https://www.youtube.com/watch?v=GyyDMduFBl0
 <img src="https://firebasestorage.googleapis.com/v0/b/locatorbuffet.appspot.com/o/IMG_1624.JPG?alt=media&token=23f968e7-deb6-4745-815f-c8c029441565" width="30%"/>
 <img src="https://firebasestorage.googleapis.com/v0/b/locatorbuffet.appspot.com/o/IMG_1625.JPG?alt=media&token=46570195-fdcb-4b33-b2a3-b8cf2bc659aa" width="30%"/>
 <img src="https://firebasestorage.googleapis.com/v0/b/locatorbuffet.appspot.com/o/IMG_1626.JPG?alt=media&token=34d99805-f23d-4202-ba96-dc4d2e34835f" width="30%"/>
-
-## To run the app on android:
-
-1. Add api_keys.xml file in main/res/values directory in android project and add the API key value
-
-
-        <?xml version="1.0" encoding="utf-8"?>
-        <resources>
-            <string name="geoApiKey">YOUR GOOGLE MAPS API GOES HERE</string>
-        </resources>
-
-2. Add the API key value in lib/api_key.dart file
