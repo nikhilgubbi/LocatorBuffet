@@ -24,7 +24,7 @@ You can also donate food for the poor & save the world from hunger !
 ## Watch the demo:
 https://www.youtube.com/watch?v=GyyDMduFBl0
 
-<img src="https://thumbs.gfycat.com/RelievedEmbarrassedBactrian-size_restricted.gif" height="300em" />
+<img src="https://thumbs.gfycat.com/RelievedEmbarrassedBactrian-size_restricted.gif" height="600em" />
 
 ## Screnshots:
 <p>
