@@ -3,7 +3,8 @@ BuffetLocator
 [![Twitter Follow](https://img.shields.io/twitter/follow/locatorbuffet.svg?style=social)](https://twitter.com/locatorbuffet)
 ## https://locatorbuffet.com/
 
-#Hack20 #Flutter
+
+**[#Hack20](https://flutterhackathon.com/) [#Flutter](https://flutter.dev/)**
 
 Find free food in your city ! Buffet Locator shows you public fridges on a map donated & maintained by sponsors in the community.
 You can also donate food for the poor & save the world from hunger !
