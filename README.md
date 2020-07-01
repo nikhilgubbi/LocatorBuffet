@@ -1,15 +1,6 @@
-# buffetlocator
+# Buffet Locator
 
-An app to find & place food around your city.
+![](demo.gif)
 
-To run the app on android:
-
-1. Add api_keys.xml file in main/res/values directory in android project and add the API key value
-
-
-        <?xml version="1.0" encoding="utf-8"?>
-        <resources>
-            <string name="geoApiKey">YOUR GOOGLE MAPS API GOES HERE</string>
-        </resources>
-
-2. Add the API key value in lib/api_key.dart file
+Hungry but poor ? Find free food in your city ! Buffet Locator shows you public fridges on a map donated & maintained by sponsors.
+You can also donate food for the poor & save the world from hunger !
